@@ -5,11 +5,16 @@ permalink: /portfolio/
 ---
 <h1 class="display">Projects</h1>
 
+<ul class="project-grid">
 {% for post in site.portfolio %}
-<article class="project">
-  <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-  <p class="where">{{ post.context }}</p>
-  <p class="prose">{{ post.excerpt }}</p>
-  <ul class="tags" aria-label="Tools">{% for t in post.tools %}<li>{{ t }}</li>{% endfor %}</ul>
-</article>
+  <li class="project-card">
+    {% if post.image %}<img src="{{ post.image }}" alt="{{ post.image_alt }}" loading="lazy">{% endif %}
+    <div class="project-body">
+      <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+      <p class="where">{{ post.context }}</p>
+      <p>{{ post.excerpt }}</p>
+      <ul class="tags" aria-label="Tools">{% for t in post.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+    </div>
+  </li>
 {% endfor %}
+</ul>

@@ -5,11 +5,19 @@ context: "Course project, Big Data Systems, UW–Madison"
 excerpt: "Spark and Hive pipeline on HDFS, a Spark MLlib model for missing features, and natural-language queries translated to Spark SQL with the Gemini API."
 tools: [PySpark, Hive, HDFS, Spark MLlib, Gemini API, gRPC, Docker, Parquet]
 collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
 ---
 <p class="muted"><a href="/portfolio/">Projects</a></p>
 <h1 class="display">Distributed big data analytics system</h1>
 <p class="lead prose">Course project for Big Data Systems at UW–Madison.</p>
 <ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
 
 <h2>What I built</h2>
 <ol class="timeline">
