@@ -158,7 +158,7 @@ p { margin: 0 0 1em; }
   main { padding: 48px 0 72px; }
   .hero { grid-template-columns: 1fr; gap: 40px; }
   .profile { position: static; max-width: 360px; }
-  .avatar { width: 120px; aspect-ratio: 1; font-size: 36px; }
+  .avatar { width: 200px; font-size: 36px; }
   .timeline > li { grid-template-columns: 1fr; gap: 4px; }
   h2 { margin-top: 56px; }
   .callout { padding: 24px; }
