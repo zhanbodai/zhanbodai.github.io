@@ -1,0 +1,27 @@
+---
+layout: plain
+title: "Wisconsin schools analysis on Google Cloud"
+excerpt: "A Dataform pipeline that loads Wisconsin school data from Cloud Storage into BigQuery and joins it with county boundaries for geographic queries."
+tools: [Google Cloud, Cloud Storage, Dataform, BigQuery, SQL, Python]
+order: 5
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Wisconsin schools analysis on Google Cloud</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Setup</div><div>Ran Jupyter on a Compute Engine VM and uploaded the raw Parquet file to a Cloud Storage bucket with PyArrow.</div></li>
+  <li><div class="when">Pipeline</div><div>Wrote three Dataform actions: one builds a table of Wisconsin counties from a public BigQuery dataset, one loads the schools file from Cloud Storage, and one joins them geographically to place each school in a county. Uploaded and compiled them from Python and checked the dependency graph.</div></li>
+  <li><div class="when">Queries</div><div>Used BigQuery pipe syntax to find counties with at least two cities that each have three or more public high schools, estimated how many runs of that query fit in the free tier, and found the nearest public high school to each public middle school in Dane County.</div></li>
+</ol>

@@ -1,0 +1,31 @@
+---
+layout: plain
+title: "Spark analysis of programming contest data"
+excerpt: "Spark SQL and Hive analysis of the CodeContests dataset, including a Gemini-based function that answers questions in plain English and a decision-tree model that estimates missing Codeforces ratings."
+tools: [PySpark, Spark SQL, Hive, HDFS, Spark MLlib, Gemini API, Docker]
+order: 1
+collection: portfolio
+redirect_from:
+  - /portfolio/distributed-big-data-analytics/
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Spark analysis of programming contest data</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Data</div><div>Loaded DeepMind's CodeContests dataset from HDFS into Hive tables, bucketed the solutions table by language, and joined it with lookup views to decode ID columns.</div></li>
+  <li><div class="when">Spark APIs</div><div>Answered the same question with the RDD API, the DataFrame API and Spark SQL, and read query plans to see when bucketing removes a shuffle.</div></li>
+  <li><div class="when">Caching</div><div>Timed the same aggregation before and after caching a filtered DataFrame.</div></li>
+  <li><div class="when">Natural-language queries</div><div>Wrote a function that sends a question and the table schemas to Gemini, extracts the generated SQL, and runs it on Spark.</div></li>
+  <li><div class="when">Machine learning</div><div>Trained a Spark MLlib decision-tree pipeline to estimate Codeforces ratings where they were missing, and compared train and test R² for tree depths from 1 to 30 to show overfitting.</div></li>
+</ol>

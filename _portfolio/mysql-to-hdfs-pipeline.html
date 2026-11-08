@@ -1,0 +1,28 @@
+---
+layout: plain
+title: "Loan data pipeline from MySQL to HDFS"
+excerpt: "A gRPC server that loads 2021 Wisconsin mortgage application data from MySQL into HDFS as Parquet, and rebuilds county-level files lost when a DataNode fails."
+tools: [MySQL, HDFS, WebHDFS, PyArrow, Parquet, gRPC, Docker]
+order: 4
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Loan data pipeline from MySQL to HDFS</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">SQL</div><div>Joined and filtered loan records in MySQL to 426,716 rows with loan amounts between $30,000 and $800,000.</div></li>
+  <li><div class="when">HDFS</div><div>Wrote the result to HDFS as Parquet with 2x replication and 1 MB blocks, and used the WebHDFS API to count the blocks stored on each DataNode.</div></li>
+  <li><div class="when">County files</div><div>Answered average-loan queries by county, saving each county's rows as a smaller Parquet file and reusing it on later requests. A benchmark script timed first and repeated requests and plotted the difference.</div></li>
+  <li><div class="when">Fault tolerance</div><div>County files have one replica, so after a DataNode was killed the server caught the read error and rebuilt the lost file from the main file, which has two.</div></li>
+</ol>
