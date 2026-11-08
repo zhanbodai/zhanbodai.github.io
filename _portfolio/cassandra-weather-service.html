@@ -1,0 +1,28 @@
+---
+layout: plain
+title: "Weather data service on Cassandra"
+excerpt: "A gRPC service that stores NOAA weather station data in a three-node Cassandra cluster, with reads that fall back to a weaker consistency level when a node is down."
+tools: [Cassandra, CQL, gRPC, PySpark, Docker]
+order: 3
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Weather data service on Cassandra</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Schema</div><div>Designed a table with station ID as the partition key, date as the clustering key, a static name column, and a user-defined type for daily minimum and maximum temperatures, with 3x replication.</div></li>
+  <li><div class="when">Loading</div><div>Parsed the fixed-width NOAA station file with Spark to select Wisconsin stations, and inserted them into Cassandra.</div></li>
+  <li><div class="when">Service</div><div>Implemented gRPC calls that return the table schema, look up a station name, record temperatures, and return a station's highest temperature, using prepared statements.</div></li>
+  <li><div class="when">Fault tolerance</div><div>Wrote at consistency level ONE so sensors can always upload. Read at level THREE so reads include every acknowledged write (R + W > RF), and fell back to ONE with a flag when a node was down. Tested by killing a node.</div></li>
+</ol>

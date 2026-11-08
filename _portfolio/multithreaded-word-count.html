@@ -1,0 +1,27 @@
+---
+layout: plain
+title: "Multithreaded word count and GIL benchmark"
+excerpt: "A multithreaded word counter for compressed text files, tested with pytest and benchmarked on Python 3.13 with and without the GIL."
+tools: [Python threading, Python 3.13, pytest, Parquet, Arrow, Docker]
+order: 7
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Multithreaded word count and GIL benchmark</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Program</div><div>Counts words per file and in total across .txt.gz files with a pool of threads and locks, and writes the table as CSV, Parquet or Arrow.</div></li>
+  <li><div class="when">Comparing AI-generated code</div><div>Wrote a specification, had three Gemini models generate code from it, and compared the results with a pytest suite.</div></li>
+  <li><div class="when">Benchmarks</div><div>Timed the program across thread counts on 256 generated files with standard and free-threaded Python 3.13, and compared how fast each output format reads back: Parquet reading only one column and Arrow through memory mapping.</div></li>
+</ol>

@@ -1,0 +1,28 @@
+---
+layout: plain
+title: "Replicated address lookup service with caching"
+excerpt: "Containers that return Madison addresses by ZIP code over gRPC, behind an HTTP layer that balances load, retries on failure, and caches results."
+tools: [gRPC, Flask, Docker Compose, Python]
+order: 6
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Replicated address lookup service with caching</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Data layer</div><div>Two identical gRPC servers that load City of Madison address data and return addresses for a ZIP code in sorted order.</div></li>
+  <li><div class="when">HTTP layer</div><div>Three Flask servers that alternate requests between the data servers, switch to the other server after a failure (up to five attempts), and report which server answered.</div></li>
+  <li><div class="when">Caching</div><div>An LRU cache of three ZIP codes in each HTTP server, so it can still answer some requests when both data servers are down.</div></li>
+  <li><div class="when">AI-assisted coding</div><div>Built the project through a series of short prompts in Aider with Gemini 2.5 Flash, and reviewed the generated code.</div></li>
+</ol>

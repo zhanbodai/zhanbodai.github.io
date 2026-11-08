@@ -1,0 +1,28 @@
+---
+layout: plain
+title: "Kafka weather stream with crash recovery"
+excerpt: "A Kafka producer for simulated weather reports and consumers that keep per-station statistics, save their offsets, and resume after a crash."
+tools: [Kafka, Protocol Buffers, Python, Docker]
+order: 2
+collection: portfolio
+# To add a picture: put it in /images/ and set the two lines below.
+# image: /images/your-file.png
+# image_alt: "Short description of the picture"
+---
+<p class="muted"><a href="/portfolio/">Projects</a></p>
+<h1 class="display display-sm">Kafka weather stream with crash recovery</h1>
+<p class="lead prose">Course project for CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
+<ul class="tags" aria-label="Tools">{% for t in page.tools %}<li>{{ t }}</li>{% endfor %}</ul>
+
+{% if page.image %}
+<h2>Overview</h2>
+<figure class="project-figure"><img src="{{ page.image }}" alt="{{ page.image_alt }}"></figure>
+{% endif %}
+
+<h2>What I built</h2>
+<ol class="timeline">
+  <li><div class="when">Producer</div><div>Created a topic with 4 partitions and streamed daily temperature reports as protobuf messages keyed by station ID, with retries and acknowledgment from all in-sync replicas.</div></li>
+  <li><div class="when">Consumer</div><div>Read manually assigned partitions and kept a running count, sum, average, and first and last date for each station, written to one JSON file per partition.</div></li>
+  <li><div class="when">Crash recovery</div><div>Saved the read offset in each file. On restart, the consumer loads the saved statistics and seeks back to that offset, so messages are not counted twice.</div></li>
+  <li><div class="when">Atomic writes</div><div>Wrote each file to a temporary path and renamed it, so a dashboard reading the file never sees a partial update.</div></li>
+</ol>

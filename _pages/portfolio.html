@@ -4,14 +4,15 @@ title: "Projects"
 permalink: /portfolio/
 ---
 <h1 class="display">Projects</h1>
+<p class="lead prose">Course projects from CS 544 Big Data Systems at UW–Madison, Fall 2025.</p>
 
+{% assign projects = site.portfolio | sort: "order" %}
 <ul class="project-grid">
-{% for post in site.portfolio %}
+{% for post in projects %}
   <li class="project-card">
     {% if post.image %}<img src="{{ post.image }}" alt="{{ post.image_alt }}" loading="lazy">{% endif %}
     <div class="project-body">
       <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
-      <p class="where">{{ post.context }}</p>
       <p>{{ post.excerpt }}</p>
       <ul class="tags" aria-label="Tools">{% for t in post.tools %}<li>{{ t }}</li>{% endfor %}</ul>
     </div>
