@@ -1,7 +1,7 @@
 ---
 layout: plain
 title: "Replicated address lookup service with caching"
-excerpt: "Containers that return Madison addresses by ZIP code over gRPC, behind an HTTP layer that balances load, retries on failure, and caches results."
+excerpt: "Two gRPC servers that return Madison addresses by ZIP code, behind HTTP servers that spread requests between them and cache recent results, so lookups continue when a data server fails."
 tools: [gRPC, Flask, Docker Compose, Python]
 order: 6
 collection: portfolio

@@ -23,6 +23,6 @@ collection: portfolio
 <ol class="timeline">
   <li><div class="when">Schema</div><div>Designed a table with station ID as the partition key, date as the clustering key, a static name column, and a user-defined type for daily minimum and maximum temperatures, with 3x replication.</div></li>
   <li><div class="when">Loading</div><div>Parsed the fixed-width NOAA station file with Spark to select Wisconsin stations, and inserted them into Cassandra.</div></li>
-  <li><div class="when">Service</div><div>Implemented gRPC calls that return the table schema, look up a station name, record temperatures, and return a station's highest temperature, using prepared statements.</div></li>
-  <li><div class="when">Fault tolerance</div><div>Wrote at consistency level ONE so sensors can always upload. Read at level THREE so reads include every acknowledged write (R + W > RF), and fell back to ONE with a flag when a node was down. Tested by killing a node.</div></li>
+  <li><div class="when">Service</div><div>Implemented gRPC calls that return the table schema, look up a station name, record temperatures, and return a station's highest temperature.</div></li>
+  <li><div class="when">Fault tolerance</div><div>Used prepared statements with fixed consistency levels: writes at ONE, so sensors can upload while any replica is up, and reads at THREE, so reads include every acknowledged write (R + W > RF). When a node was down, reads fell back to ONE and flagged the result. Tested by killing a node.</div></li>
 </ol>

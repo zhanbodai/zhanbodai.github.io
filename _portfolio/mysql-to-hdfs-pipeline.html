@@ -1,7 +1,7 @@
 ---
 layout: plain
 title: "Loan data pipeline from MySQL to HDFS"
-excerpt: "A gRPC server that moves 2021 Wisconsin mortgage application data from MySQL into HDFS as Parquet, caches county-level files, and rebuilds them after a DataNode failure."
+excerpt: "A gRPC server that loads 2021 Wisconsin mortgage application data from MySQL into HDFS as Parquet, and rebuilds county-level files lost when a DataNode fails."
 tools: [MySQL, HDFS, WebHDFS, PyArrow, Parquet, gRPC, Docker]
 order: 4
 collection: portfolio
